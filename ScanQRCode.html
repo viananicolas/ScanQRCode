@@ -1,0 +1,96 @@
+<html>
+
+<head>
+	<title>ScanQRCode</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+
+<body>
+	<video playsinline id="vidWebCan"></video>
+
+
+	<h2>Cameras</h2>
+
+
+	<button id="btnAtivarCameras">Ativar Cameras</button>
+	<input id="edtEscolhaPerfeitaDe" name="edtEscolhaPerfeitaDe" type="text" placeholder="Numero da Carteira" value="" />
+	<button id="btnCancelarCameras">Cancelar Cameras</button>
+
+	<script>
+		console.log(Date.now());
+	</script>
+
+	<script src="jquery-1.6.4.min.js"></script>
+	<script src="instascan.min.js"></script>
+	<script>
+		var self = this;
+		var objScanners = null;
+		var objCameras = [];
+
+
+
+		jQuery(function () {
+
+
+			$('#btnAtivarCameras').click(function () {
+				console.log('Clicou');
+
+
+
+				self.objScanners = new Instascan.Scanner(
+					{
+						video: document.getElementById('vidWebCan'), scanPeriod: 5
+					});
+
+
+				objScanners.addListener('scan', content => {
+					console.log(content)
+					alert(content);
+
+					$("#edtEscolhaPerfeitaDe").val(content);
+				});
+
+
+				Instascan.Camera.getCameras().then(function (objCameras) {
+					self.objCameras = objCameras;
+
+					if (objCameras.length > 0) {
+						objScanners.start(objCameras[0]);
+					}
+					else {
+						console.log('No cameras found.');
+					}
+				}).catch(function (e) {
+					console.log(e);
+				});
+
+
+			});
+
+
+
+
+
+
+
+
+			$('#btnCancelarCameras').click(function () {
+				self.objScanners.stop();
+			});
+
+
+
+		});
+
+
+
+
+
+
+
+	</script>
+
+	<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+</body>
+
+</html>
