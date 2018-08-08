@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<video autoplay playsinline controls="true" id="vidWebCan"></video>
+	<video autoplay="true" playsinline controls="true" id="vidWebCan"></video>
 
 
 	<h2>Cameras</h2>
@@ -58,7 +58,7 @@
 					self.objCameras = objCameras;
 
 					if (objCameras.length > 0) {
-						objScanners.start(objCameras[0]);
+						objScanners.start(objCameras[1]);
 					}
 					else {
 						console.log('No cameras found.');
