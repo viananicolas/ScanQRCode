@@ -30461,7 +30461,7 @@ var Camera = function () {
                 constraints = {
                   audio: false,
                   video: {
-                    facingMode: { exact: "environment" },
+                    facingMode: { exact: "user" },
                     mandatory: {
                       sourceId: this.id,
                       minWidth: 600,
